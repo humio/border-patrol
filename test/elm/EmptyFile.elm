@@ -1,0 +1,1 @@
+-- This file is for testing that the bp can handle invalid Elm files.

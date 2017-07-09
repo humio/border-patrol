@@ -1,0 +1,6 @@
+{
+  "restrictions": {
+    "Api": ["Core"],
+    "Core": ["Util", "Api"]
+  }
+}
