@@ -1,4 +1,4 @@
-<img align="right" src="images/logo.png">
+<img align="right" src="images/logo.png" />
 
 # Border Patrol
 
