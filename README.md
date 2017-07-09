@@ -75,7 +75,7 @@ different responsibilities in your code base.
 
 ## Project Sponsor - Humio
 
-![Humio](./humio.png)
+![Humio](./images/humio.png)
 
 [Humio](https://humio.com/)
 
