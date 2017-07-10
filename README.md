@@ -15,7 +15,9 @@ and [Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design).
 
 ## Configuration File
 
-Place a _JSON_ file called `boundaries.json` at the root of project.
+Border Patrol is configured by placing a _JSON_ file called `boundaries.json` at
+the root of your project. It contains the rules defining the boundaries in your
+code base.
 
 ### Example
 
@@ -24,16 +26,30 @@ Place a _JSON_ file called `boundaries.json` at the root of project.
   "restrictions": {
     "Api": ["Html"],
     "Logic": ["Http", "Api", "SQL"],
-    "GUI": ["Api", "Http"]
+    "GUI.Finance": ["Api", "Http", "Logic.Logistics"]
   }
 }
 ```
+
+Here is how to read the rules, e.g.:
+
+```
+"GUI": ["Api", "Http", "Logic.Finance"]
+```
+The code in the packages `GUI.Finance` and `GUI.Finance.*` (any sub-packages of `GUI.Finance`) are restricted from
+importing `Api`, `Http` or `Logic.Logistics` or anything from any of their sub-packages.
+On the other hand `GUI.Finance` could for instance import `Logic.Finance` without any problems.  
+
+Figuring out restrictions is usually pretty easy. E.g.:
 
 The `Api.*` modules should not be producing any view HTML so has no business
 importing the `Html.*` packages.
 
 The `Logic.*` modules should be where the bulk of the business logic lives, it
 should not touch networking code or database dependencies.
+
+Anytime you find someone added some dependency to apart of the code where it does not
+fit, add a restriction.
 
 ## Running
 
@@ -61,15 +77,15 @@ but suggestions and contributions/PRs are welcome!
 
 _Code Cohesion_ is a measure of how closely code elements inside a
 module are related to each other. As a project grows and new contributors join
-cohesion tends to creep.
+cohesion tends to decline.
 
-Grouping code in packages you can quite easily see what the code should and should
-_not_ be doing, e.g. code inside the `API` package should probably be dealing
-with packages like `network`, `http` or `json` but probably not be using `html` or
-`opengl`.
+By grouping code in packages by domain/responsibility you can usually quite easily
+see what the code should and should _not_ be doing, e.g. code inside the `API` package
+should probably be dealing with packages like `network`, `http` or `json` but probably
+not be using `html` or `opengl`.
 
 So, `API` should not even be allowed to import those packages. That is common sense.
-In teams conventions like these are hard to maintain without formalizing them as code -
+But conventions like these are hard to maintain in teams without formalizing them as code -
 this is what Border Patrol was made for. It maintains the boundaries between code with
 different responsibilities in your code base.
 
