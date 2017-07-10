@@ -18,6 +18,12 @@ func main() {
 	project := readProject(rootDir)
 	report := Check(config, project)
 	printReport(report)
+
+	if len(report) > 0 {
+		os.Exit(1)
+	} else {
+		os.Exit(0)
+	}
 }
 
 func readConfig(rootDir string) Config {
