@@ -77,7 +77,7 @@ but suggestions and contributions/PRs are welcome!
 &#65121; This means you Border Patrol will not detect violations on specific classes when
 using the import syntax `import my.{Class, OtherClass}` if you e.g. restricted `my.Class`.
 
-## Rational
+## Rationale
 
 _Code Cohesion_ is a measure of how closely code elements inside a
 module are related to each other. As a project grows and new contributors join
