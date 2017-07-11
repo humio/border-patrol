@@ -92,6 +92,10 @@ But conventions like these are hard to maintain in teams without formalizing the
 this is what Border Patrol was made for. It maintains the boundaries between code with
 different responsibilities in your code base.
 
+## TODOs
+
+- [ ] Allow setting source root directory in config file.
+
 ## Project Sponsor - Humio
 
 ![Humio](./images/humio.png)
