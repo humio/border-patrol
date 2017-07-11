@@ -2,12 +2,28 @@ package main
 
 import (
 	"encoding/json"
+	"log"
 	"strings"
 )
 
 // Config ...
 type Config struct {
+	Language     string                `json:"language"`
 	Restrictions map[string]([]string) `json:"restrictions"`
+}
+
+func extensionForLanguage(language string) string {
+	switch l := strings.ToLower(language); l {
+	case "elm":
+		// TODO: Consider supporting 'elmx' extension.
+		return "elm"
+	case "scala":
+		return "scala"
+	default:
+		log.Fatal("Unknown language configuration: " + language)
+	}
+
+	return ""
 }
 
 // LoadConfig ...
@@ -30,7 +46,7 @@ func Check(config Config, project map[string][]string) map[string][]string {
 					if errors[candicate] == nil {
 						errors[candicate] = make([]string, 0)
 					}
-					errors[candicate] = append(errors[candicate], "Restricted import "+errorImport)
+					errors[candicate] = append(errors[candicate], "import "+errorImport)
 				}
 			}
 		}

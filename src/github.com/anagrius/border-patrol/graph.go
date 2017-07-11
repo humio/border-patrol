@@ -1,7 +1,5 @@
 package main
 
-// Pair ...
-
 func sources(group map[string][]string) []string {
 	sources := []string(nil)
 	for k := range group {

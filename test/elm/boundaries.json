@@ -1,4 +1,5 @@
 {
+  "language": "Elm",
   "restrictions": {
     "Api": ["Core"],
     "Core": ["Util", "Api"]

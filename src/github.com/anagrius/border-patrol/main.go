@@ -5,18 +5,16 @@ import (
 	"log"
 	"os"
 	"path"
-	"regexp"
 )
-
-var importRegexp = regexp.MustCompile(`^import (\S+)`)
-var moduleRegexp = regexp.MustCompile(`^(?:port|effect)?\s*module\s+(\S+)`)
 
 func main() {
 	rootDir := os.Args[1]
 
 	config := readConfig(rootDir)
-	project := readProject(rootDir)
+	extension := extensionForLanguage(config.Language)
+	project := readProject(rootDir, extension)
 	report := Check(config, project)
+
 	printReport(report)
 
 	if len(report) > 0 {

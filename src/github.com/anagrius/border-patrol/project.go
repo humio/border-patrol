@@ -6,10 +6,14 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 )
 
-func readProject(rootDir string) map[string][]string {
+var importRegexp = regexp.MustCompile(`^import (\S+)`)
+var moduleRegexp = regexp.MustCompile(`^(?:port|effect)?\s*module\s+(\S+)`)
+
+func readProject(rootDir string, extension string) map[string][]string {
 	entries, err := ioutil.ReadDir(rootDir)
 
 	if err != nil {
@@ -22,22 +26,31 @@ func readProject(rootDir string) map[string][]string {
 
 		ePath := filepath.Join(rootDir, e.Name())
 		if e.IsDir() {
-			for k, v := range readProject(ePath) {
+			for k, v := range readProject(ePath, extension) {
 				project[k] = v
 			}
 		} else {
-			// TODO: Consider supporting 'elmx' extension.
-			if !strings.HasSuffix(e.Name(), ".elm") {
+			if !strings.HasSuffix(e.Name(), "."+extension) {
 				continue
 			}
 
-			for k, v := range parseFile(ePath) {
-				project[k] = v
+			if extension == "scala" {
+				project = mergeInto(project, parseScalaFile(ePath))
+			} else {
+				project = mergeInto(project, parseFile(ePath))
 			}
 		}
 	}
 
 	return project
+}
+
+func mergeInto(existing map[string][]string, newStuff map[string][]string) map[string][]string {
+	for k, v := range newStuff {
+		existing[k] = append(existing[k], v...)
+	}
+
+	return existing
 }
 
 func parseFile(filepath string) map[string][]string {

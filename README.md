@@ -66,12 +66,15 @@ CI setup.
 This is a very young project. These are the languages we initial plan to support.
 
 - [ ] Java
-- [ ] Scala
+- [x] Scala _(No support for single class-restrictions*)_
 - [x] Elm
 - [ ] NodeJS
 - [ ] Go
 
 but suggestions and contributions/PRs are welcome!
+
+* This means you Border Patrol will not detect violations on specific classes when
+using the import syntax `import my.{Class, OtherClass}` if you e.g. restricted `my.Class`.
 
 ## Rational
 

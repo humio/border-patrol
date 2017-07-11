@@ -7,6 +7,7 @@ import (
 func TestReadingRestrictions(t *testing.T) {
 	config, err := LoadConfig([]byte(`
     {
+			"language": "elm",
       "restrictions": {
         "Api.Z": ["Core.Y", "Main"],
         "Core.Y": ["Main"]
@@ -39,7 +40,7 @@ func TestCheckingProject(t *testing.T) {
 		t.Error("Failed to Read Json", err)
 	}
 
-	expected := []string{"Restricted import Foo.Bar", "Restricted import Api.Z"}
+	expected := []string{"import Foo.Bar", "import Api.Z"}
 	result := Check(config, project)
 
 	expectListsEq(t, result["Core.Y"], expected)

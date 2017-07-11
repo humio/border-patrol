@@ -1,0 +1,7 @@
+{
+  "language": "scala",
+  "restrictions": {
+    "com.humio.core": ["java", "com.humio.kafka"],
+    "bar.xi.moo": ["press"]
+  }
+}
