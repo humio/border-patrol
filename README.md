@@ -9,7 +9,7 @@ introducing code that goes against the project's structure. It prevents you from
 importing/using packages you shouldn't. `MyProject.Format.Json` should not be
 importing anything from `Graphics.*`, so don't allow it - __enforce__ it.
 
-Border Patrol is best using when applying the architectural thinking described in
+Border Patrol is best used when applying the architectural thinking described in
 [The Hexagonal Architecture](http://alistair.cockburn.us/Hexagonal+architecture)
 and [Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design).
 
