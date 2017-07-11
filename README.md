@@ -54,6 +54,7 @@ fit, add a restriction.
 ## Running
 
 ```bash
+$ cd <my project path>
 $ border-patrol
 ```
 
