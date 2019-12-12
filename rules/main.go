@@ -7,7 +7,7 @@ import (
 	"path"
 )
 
-func main() {
+func Run() {
 	rootDir := os.Args[1]
 
 	config := readConfig(rootDir)

@@ -14,15 +14,8 @@
 
 package main
 
-import "github.com/humio/cli/cmd"
-
-var (
-	version = "master"
-	commit  = "none"
-	date    = "unknown"
-)
+import "github.com/humio/border-patrol/rules"
 
 func main() {
-	cmd.SetVersion(version, commit, date)
-	cmd.Execute()
+	rules.Run()
 }

@@ -1,4 +1,4 @@
-package main
+package rules
 
 func sources(group map[string][]string) []string {
 	sources := []string(nil)
